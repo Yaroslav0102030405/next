@@ -1,5 +1,10 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Сторінка про пости",
+  description: "Сторінка про пости",
+};
+
 interface Post {
   userId: number;
   id: number;

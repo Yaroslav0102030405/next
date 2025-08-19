@@ -1,3 +1,6 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+
 interface Post {
   userId: number;
   id: number;
@@ -5,21 +8,41 @@ interface Post {
   body: string;
 }
 
-const PostPage = async ({
-  params,
-}: {
+// Виправлено: params тепер звичайний об'єкт, а не Promise
+type Props = {
   params: Promise<{ postId: string }>;
-}) => {
-  const { postId } = await params;
+};
 
-  const postResponse = await fetch(
-    `https://jsonplaceholder.typicode.com/posts/${postId}`
-  );
-  const post: Post = await postResponse.json();
+async function getPost(id: string): Promise<Post> {
+  const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+
+  if (!res.ok) {
+    if (res.status === 404) {
+      notFound();
+    }
+    throw new Error(`Помилка відповіді сервера: ${res.status}`);
+  }
+
+  return await res.json();
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { postId } = await params;
+  const post = await getPost(postId);
+
+  return {
+    title: `Сторінка ${post.title} | My Blog`,
+    description: post.body.slice(0, 160),
+  };
+}
+
+const PostPage = async ({ params }: Props) => {
+  const { postId } = await params;
+  const post = await getPost(postId);
 
   return (
     <>
-      <h2>{post.title}</h2>
+      <h1>{post.title}</h1>
       <p>{post.body}</p>
     </>
   );

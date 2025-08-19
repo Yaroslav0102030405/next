@@ -14,6 +14,9 @@ export default function Home() {
             <Link href="/about">Про нас</Link>
           </li>
           <li>
+            <Link href="/blog">Сторінка блог</Link>
+          </li>
+          <li>
             <Link href="/posts">Сторінка всіх постів</Link>
           </li>
           <li>

@@ -1,5 +1,10 @@
 import Button from "../components/Button/Button";
 
+export const metadata = {
+  title: "Сторінка про нас",
+  description: "Сторінка про нас",
+};
+
 const About = () => {
   return (
     <>
