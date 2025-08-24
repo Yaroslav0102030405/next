@@ -1,0 +1,14 @@
+h1,
+p {
+  font-family: Lato;
+}
+
+h3 {
+  display: flex;
+  justify-content: center;
+  background: #000;
+  margin: 0 10px;
+  color: aqua;
+  text-align: center;
+  line-height: 50px;
+}
