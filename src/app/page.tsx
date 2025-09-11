@@ -64,6 +64,14 @@ export default function Home() {
               Сторінка Register
             </Link>
           </li>
+          <li>
+            <Link
+              className={pathname === "/contacts" ? "text-red-600" : ""}
+              href="/contacts"
+            >
+              Сторінка Контакти
+            </Link>
+          </li>
         </ul>
       </nav>
     </>
